@@ -65,7 +65,7 @@ class NewsViewModelTest {
 //        viewModel.listener = listener
 //        viewModel.saveClick(
 //            NewsResponse(
-//                id = 12,
+//                id = 1215,
 //                title = "teste",
 //                summary = "teste descricao",
 //                newsSite = "",
@@ -74,8 +74,8 @@ class NewsViewModelTest {
 //                url = "",
 //                events = arrayListOf(),
 //                launches = arrayListOf()
-//            )
 //
+//            )
 //        )
 //    }
 

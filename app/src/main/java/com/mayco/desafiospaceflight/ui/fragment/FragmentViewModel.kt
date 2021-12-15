@@ -59,6 +59,7 @@ class FragmentViewModel(private val repository: NewsRepository) : ViewModel(), C
 
             } catch (e: Exception) {
 
+                _newsList.postValue(arrayListOf())
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.mayco.desafiospaceflight.ui.home
+package com.mayco.desafiospaceflight.ui.dialog
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -15,50 +15,52 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.Mockito.CALLS_REAL_METHODS
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
-import retrofit2.Response
 
 @RunWith(MockitoJUnitRunner.Silent::class)
 @ExperimentalCoroutinesApi
 
-class HomeViewModelTest {
+class DialogDetailsViewModelTest {
 
     private val dispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
-    private lateinit var viewModel: HomeViewModel
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
+
+    private lateinit var viewModel: DialogDetailsViewModel
 
     @Mock
     private lateinit var repository: NewsRepository
 
     @Mock
-    private lateinit var listener: HomeListener
+    private lateinit var listener: DialogListener
 
     @Mock
     private lateinit var newsObserver: Observer<List<NewsResponse>>
 
+
     @Before
-    fun setup() {
+    fun setup(){
         MockitoAnnotations.initMocks(this)
         Dispatchers.setMain(dispatcher)
-        viewModel = HomeViewModel((repository))
+        viewModel = DialogDetailsViewModel(repository)
     }
 
     @Test
-    fun getNewsError() = TestCoroutineDispatcher().runBlockingTest {
-        val newsResponse: List<NewsResponse> = arrayListOf()
+    fun get() = TestCoroutineDispatcher().runBlockingTest {
+        val newsResponse : List<NewsResponse> = arrayListOf()
 
-        Mockito.`when`(repository.getNews(0,1)).thenReturn(Response.success(newsResponse))
+        Mockito.anyList<NewsResponse>()
 
-        viewModel.listener = listener
-        viewModel.newList.observeForever(newsObserver)
-        viewModel.getNews()
 
-        verify(newsObserver).onChanged(newsResponse)
+
+        verify(newsResponse)
+
     }
 
 }
