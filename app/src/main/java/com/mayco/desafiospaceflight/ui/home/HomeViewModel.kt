@@ -25,7 +25,6 @@ class HomeViewModel(val repository: NewsRepository) : ViewModel(), CoroutineScop
         get() = _newsList
 
 
-
     fun getNews() {
         launch {
             try {
@@ -37,7 +36,7 @@ class HomeViewModel(val repository: NewsRepository) : ViewModel(), CoroutineScop
                     repository.saveNews(response.body()!!)
                     listener!!.apiSuccess()
 
-                } else{
+                } else {
 
                     _newsList.postValue(arrayListOf())
 
