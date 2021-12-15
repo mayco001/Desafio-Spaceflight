@@ -31,15 +31,23 @@ class HomeViewModel(val repository: NewsRepository) : ViewModel(), CoroutineScop
             try {
                 val response = repository.getNews(15, (0..100).random())
                 if (response.isSuccessful) {
+
+                    _newsList.postValue(response.body())
+
                     repository.saveNews(response.body()!!)
                     listener!!.apiSuccess()
 
                 } else{
 
+                    _newsList.postValue(arrayListOf())
+
                     listener!!.apiError("Error")
                 }
 
             } catch (e: Exception) {
+
+                _newsList.postValue(arrayListOf())
+
                 listener!!.apiError("Error....Error")
             }
         }
